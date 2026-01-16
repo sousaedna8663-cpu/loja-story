@@ -1,6 +1,6 @@
+import React from 'react';
 import { useState } from 'react';
 
-// 1. DADOS DOS BRINQUEDOS (Fora da função App)
 const BRINQUEDOS = [
   {
     id: 1,
@@ -8,7 +8,7 @@ const BRINQUEDOS = [
     preco: "149,90",
     idade: "5+",
     cor: "border-blue-400",
-    imagem: "images.pexels.com"
+    imagem: "/foguete.jpg", 
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const BRINQUEDOS = [
     preco: "79,00",
     idade: "0+",
     cor: "border-pink-400",
-    imagem: "images.pexels.com"
+    imagem: "/urso.jpg",
   },
   {
     id: 3,
@@ -24,16 +24,16 @@ const BRINQUEDOS = [
     preco: "115,00",
     idade: "3+",
     cor: "border-yellow-400",
-    imagem: "images.pexels.com"
+    imagem: "blocos.jpg"
   },
 ];
 
-// 2. FUNÇÃO ÚNICA DO APP
+
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (product) => {
-    // Verifica se já existe para não repetir no contador (lógica simples)
+   
     if (!cartItems.find(item => item.id === product.id)) {
       setCartItems([...cartItems, product]);
     } else {
@@ -51,7 +51,7 @@ function App() {
         <p className="text-gray-500 font-medium">Diversão garantida em 2026!</p>
       </header>
 
-      {/* CONTADOR DO CARRINHO */}
+      {/* CARRINHO DE COMPRAS */}
       <div className="max-w-6xl mx-auto mb-8 flex justify-end">
         <div className="bg-white p-3 rounded-2xl shadow-md flex items-center border-2 border-blue-100">
           <span className="text-gray-600 mr-3 font-bold">🛒 Carrinho:</span>
@@ -94,5 +94,3 @@ function App() {
 }
 
 export default App;
-
-
