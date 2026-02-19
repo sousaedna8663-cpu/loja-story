@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Loja Story</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .navbar { background: #333; padding: 10px; margin-bottom: 30px; }
+        .navbar a { color: white; text-decoration: none; margin: 0 15px; }
+        .navbar a:hover { text-decoration: underline; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .faq-container { background: #f9f9f9; padding: 20px; border-radius: 8px; }
+        .faq-item { margin: 15px 0; border-left: 4px solid #007bff; padding: 15px; background: white; border-radius: 4px; }
+        .faq-question { font-weight: bold; color: #333; cursor: pointer; display: flex; align-items: center; }
+        .faq-question::before { content: "▶ "; margin-right: 10px; transition: transform 0.3s; display: inline-block; }
+        .faq-item.active .faq-question::before { transform: rotate(90deg); }
+        .faq-answer { display: none; color: #666; margin-top: 10px; }
+        .faq-item.active .faq-answer { display: block; }
+        .btn-voltar { background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        .btn-voltar:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="../index.html">Home</a>
+        <a href="contato.html">Contato</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+    <div class="container">
+        <h1>❓ Perguntas Frequentes</h1>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Como faço para fazer um pedido?</div>
+                <div class="faq-answer">
+                    Você pode navegar pelos nossos produtos na página inicial, adicionar itens ao carrinho 
+                    e clicar em "Ir para Finalização" para concluir sua compra.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Qual é o tempo de entrega?</div>
+                <div class="faq-answer">
+                    Nossas entregas levam em média 3-5 dias úteis. Você receberá um código de rastreamento 
+                    após a confirmação do pedido.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Vocês aceitam devoluções?</div>
+                <div class="faq-answer">
+                    Sim! Você tem até 30 dias após receber o produto para solicitar uma devolução, 
+                    desde que o item esteja em perfeito estado.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Quais são as formas de pagamento?</div>
+                <div class="faq-answer">
+                    Aceitamos cartão de crédito, débito, PIX e boleto. Todos os pagamentos são seguros 
+                    e criptografados.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Posso mudar meu pedido após finalizá-lo?</div>
+                <div class="faq-answer">
+                    Você pode entrar em contato conosco imediatamente após o pedido para tentar fazer 
+                    alterações. Entre em contato pelo formulário de contato para mais informações.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Como entro em contato com o suporte?</div>
+                <div class="faq-answer">
+                    Você pode nos contatar através de nossa página de contato, enviando um formulário 
+                    com sua dúvida ou solicitação.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Os produtos têm garantia?</div>
+                <div class="faq-answer">
+                    Todos os nossos produtos têm garantia de qualidade. Se receber um item defeituoso, 
+                    entre em contato imediatamente para uma solução rápida.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Vocês fazem envios internacionais?</div>
+                <div class="faq-answer">
+                    No momento, realizamos envios apenas para o Brasil. Fique atento a futuras expansões 
+                    de nossos serviços.
+                </div>
+            </div>
+        </div>
+
+        <a href="../index.html" class="btn-voltar">← Voltar para Home</a>
+    </div>
+
+    <script>
+        // Script para expandir/retrair respostas
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

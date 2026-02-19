@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Compra - Loja Story</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-checkout { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn-pagar { width: 100%; background: #007bff; color: white; border: none; padding: 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="form-checkout">
+        <h2>Finalize seu Pedido</h2>
+        <div id="resumo-pedido"></div>
+        <hr>
+        <input type="text" id="nome" placeholder="Nome Completo" required>
+        <input type="text" id="endereco" placeholder="Endereço de Entrega" required>
+        <input type="text" id="cartao" placeholder="Número do Cartão (Simulação)" required>
+        <button class="btn-pagar" onclick="processarPagamento()">Confirmar Pagamento</button>
+    </div>
+
+    <script>
+        // Recupera o carrinho salvo no navegador (localStorage)
+        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+        document.getElementById('resumo-pedido').innerText = `Total de itens: ${carrinho.length} | Total: R$ ${total.toFixed(2)}`;
+
+        function processarPagamento() {
+            const dados = {
+                cliente: document.getElementById('nome').value,
+                endereco: document.getElementById('endereco').value,
+                itens: carrinho,
+                total: total
+            };
+
+            fetch('/api/finalizar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert("Sucesso! " + data.mensagem);
+                localStorage.removeItem('carrinho'); // Limpa o carrinho
+                window.location.href = '/'; // Volta para a loja
+            });
+        }
+    </script>
+</body>
+</html>
