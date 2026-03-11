@@ -144,7 +144,6 @@ export default function Produtos({ onAddToCart }) {
           </div>
         </div>
 
-        {/* GRID DE PRODUTOS */}
         {produtosFiltrados.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {produtosFiltrados.map((product, index) => (
@@ -153,7 +152,6 @@ export default function Produtos({ onAddToCart }) {
                 className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                {/* IMAGEM E BADGES */}
                 <div className="relative overflow-hidden bg-gradient-to-br from-pink-200 to-blue-200 h-64">
                   <img 
                     src={product.imagem} 
@@ -175,7 +173,6 @@ export default function Produtos({ onAddToCart }) {
                   </span>
                 </div>
 
-                {/* CONTEÚDO */}
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-gray-800 mb-2 min-h-14">
                     {product.nome}

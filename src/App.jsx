@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+import { Home } from './pages/home';
 import Produtos from './pages/Produtos';
-import Carrinho from './pages/Carrinho';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 import Sobre from './pages/Sobre';
 import Contato from './pages/Contato';
+import Carrinho from './pages/Carrinho';
 import './App.css';
 
-function AppContent() {
+export default function App() {
   const [cartItems, setCartItems] = useState(() => {
     const saved = localStorage.getItem('cartItems');
     return saved ? JSON.parse(saved) : [];
   });
 
-  const navigate = useNavigate();
-
-  // Salvar carrinho no localStorage
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -29,26 +27,20 @@ function AppContent() {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
         return prevItems.map(item =>
-          item.id === product.id
-            ? { ...item, quantidade: item.quantidade + 1 }
-            : item
+          item.id === product.id ? { ...item, quantidade: item.quantidade + 1 } : item
         );
-      } else {
-        return [...prevItems, { ...product, quantidade: 1 }];
       }
+      return [...prevItems, { ...product, quantidade: 1 }];
     });
-    alert('✅ Produto adicionado ao carrinho!');
   };
 
-  const onUpdateQuantity = (productId, newQuantity) => {
-    if (newQuantity <= 0) {
+  const onUpdateQuantity = (productId, quantidade) => {
+    if (quantidade <= 0) {
       onRemoveFromCart(productId);
     } else {
       setCartItems(prevItems =>
         prevItems.map(item =>
-          item.id === productId
-            ? { ...item, quantidade: newQuantity }
-            : item
+          item.id === productId ? { ...item, quantidade } : item
         )
       );
     }
@@ -63,38 +55,31 @@ function AppContent() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header cartCount={cartCount} />
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home onAddToCart={onAddToCart} />} />
-          <Route path="/produtos" element={<Produtos onAddToCart={onAddToCart} />} />
-          <Route 
-            path="/carrinho" 
-            element={
-              <Carrinho 
-                cartItems={cartItems}
-                onUpdateQuantity={onUpdateQuantity}
-                onRemoveFromCart={onRemoveFromCart}
-                onClearCart={onClearCart}
-              />
-            } 
-          />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/contato" element={<Contato />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
-  );
-}
-
-function App() {
-  return (
     <Router>
-      <AppContent />
+      <div className="flex flex-col min-h-screen">
+        <Header cartCount={cartCount} />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home onAddToCart={onAddToCart} />} />
+            <Route path="/produtos" element={<Produtos onAddToCart={onAddToCart} />} />
+            <Route path="/produto/:id" element={<ProductDetailPage onAddToCart={onAddToCart} />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/contato" element={<Contato />} />
+            <Route 
+              path="/carrinho" 
+              element={
+                <Carrinho 
+                  cartItems={cartItems} 
+                  onUpdateQuantity={onUpdateQuantity}
+                  onRemoveFromCart={onRemoveFromCart}
+                  onClearCart={onClearCart}
+                />
+              } 
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }
-
-export default App;

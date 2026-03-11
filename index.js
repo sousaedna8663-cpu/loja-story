@@ -1,9 +1,11 @@
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
 // 1. Configurações (Middleware)
 app.use(express.json());
-app.use(express.static('loja-story/public')); // Serve o index.html, checkout.html e admin.html
+app.use(express.static(path.join(__dirname, 'public'))); // arquivos estáticos (legado)
 
 // 2. Banco de Dados Temporário (em memória)
 const pedidos = [];
